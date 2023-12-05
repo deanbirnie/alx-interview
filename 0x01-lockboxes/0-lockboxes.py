@@ -3,7 +3,9 @@
 
 
 def canUnlockAll(boxes):
-    """This method returns true if all boxes can be unlocked, otherwise false"""
+    """
+    This method returns true if all boxes can be unlocked, otherwise false
+    """
     unique_keys = [0]
     new_boxes_we_can_open = []
     i = 0
