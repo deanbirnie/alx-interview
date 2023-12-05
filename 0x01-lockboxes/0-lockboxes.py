@@ -6,28 +6,18 @@ def canUnlockAll(boxes):
     """
     This method returns true if all boxes can be unlocked, otherwise false
     """
-    if (len(boxes) == 0):
+    keys = [0]
+    prev_key_len = 0
+    while len(keys) > prev_key_len:
+        prev_key_len = len(keys)
+        for i in range(len(keys)):
+            if keys[i] >= len(boxes):
+                continue
+            new_keys = boxes[keys[i]]
+            for k in new_keys:
+                if k not in keys:
+                    keys.append(k)
+    all_keys = list(range(len(boxes)))
+    if all([key in keys for key in all_keys]):
         return True
-    unique_keys = [0]
-    new_boxes_we_can_open = []
-    i = 0
-    if len(boxes) <= 1 or boxes == [[]]:
-        return True
-    for box in boxes:
-        if i not in unique_keys:
-            return False
-        for key in box:
-            if key:
-                if key not in unique_keys and key < len(boxes):
-                    unique_keys.append(key)
-                    new_boxes_we_can_open.append(key)
-        for box2 in new_boxes_we_can_open:
-            if boxes[box2]:
-                new_keys = boxes[box2]
-                if new_keys:
-                    for key in new_keys:
-                        if key not in unique_keys:
-                            unique_keys.append(key)
-
-        i += 1
-    return True
+    return False
