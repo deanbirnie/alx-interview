@@ -6,6 +6,8 @@ def canUnlockAll(boxes):
     """
     This method returns true if all boxes can be unlocked, otherwise false
     """
+    if (len(boxes) == 0):
+        return True
     unique_keys = [0]
     new_boxes_we_can_open = []
     i = 0
@@ -28,5 +30,3 @@ def canUnlockAll(boxes):
 
             i += 1
         return True
-    else:
-        return False
