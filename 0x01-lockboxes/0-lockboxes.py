@@ -10,7 +10,7 @@ def canUnlockAll(boxes):
     for box in boxes:
         for key in box:
             if key:
-                if key not in unique_keys:
+                if key not in unique_keys and key < len(boxes):
                     unique_keys.append(key)
                     new_boxes_we_can_open.append(key)
         for box in new_boxes_we_can_open:
