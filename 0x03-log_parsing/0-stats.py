@@ -1,43 +1,44 @@
-#!/usr/bin/env python3
-"""
-This module collects metrics for a web server.
-"""
-
 import sys
 
-def print_stats(stats: dict, file_size: int) -> None:
-    """Prints server metrics"""
-    print(f"File size: {file_size}")
-    for code, count in sorted(stats.items()):
-        if count:
-            print(f"{code}: {count}")
 
-def compute_metrics():
-    """Computes metrics for a web server"""
-    file_size, count = 0, 0
-    status_codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
-    metrics = {code: 0 for code in status_codes}
+file_sizes = []
+status_code_count = {
+    200: 0,
+    301: 0,
+    400: 0,
+    401: 0,
+    403: 0,
+    404: 0,
+    405: 0,
+    500: 0
+}
+line_count = 0
 
-    try:
-        for line in sys.stdin:
-            count += 1
-            data = line.split()
-            try:
-                status_code = data[-2]
-                if status_code in metrics:
-                    metrics[status_code] += 1
-            except IndexError:
-                pass
-            try:
-                file_size += int(data[-1])
-            except (IndexError, ValueError):
-                pass
-            if count % 10 == 0:
-                print_stats(metrics, file_size)
-        print_stats(metrics, file_size)
-    except KeyboardInterrupt:
-        print_stats(metrics, file_size)
-        raise
+try:
+    for line in sys.stdin:
+        parts = line.split()
 
-if __name__ == "__main__":
-    compute_metrics()
+        if len(parts) >= 7 and parts[5].isdigit() and int(parts[5]) in status_code_count:
+            file_size = int(parts[6])
+            status_code = int(parts[5])
+
+            file_sizes.append(file_size)
+            status_code_count[status_code] += 1
+            line_count += 1
+
+        if line_count == 10:
+            total_size = sum(file_sizes)
+            print(f"File size: {total_size}")
+
+            for code in sorted(status_code_count.keys()):
+                count = status_code_count[code]
+                if count > 0:
+                    print(f"{code}: {count}")
+
+            file_sizes = []
+            status_code_count = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+            line_count = 0
+
+except KeyboardInterrupt:
+    total_size = sum(file_sizes)
+    pr
