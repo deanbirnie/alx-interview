@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Solution for island perimeter interview problem"""
 
+
 def island_perimeter(grid):
     """
     Interview problem: Island perimter
