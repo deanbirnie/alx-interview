@@ -1,0 +1,8 @@
+# ignore emacs temporary files
+*~
+
+# ignore ALX provided files
+main_0.py
+
+# ignore byte compiled files
+__pycache__/
