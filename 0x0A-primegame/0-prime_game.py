@@ -26,14 +26,10 @@ def isWinner(x, nums):
     maria_wins = 0
     ben_wins = 0
 
-    for i in range(x):
-        moves = 0
+    for num in nums:
+        primes_count = sum( 1 for i in range(1, num + 1) if isPrime(i))
 
-        for j in range(1, nums[i] + 1):
-            if isPrime(j):
-                moves += 1
-
-        if moves % 2 == 0:
+        if primes_count % 2 == 0:
             ben_wins += 1
         else:
             maria_wins += 1
