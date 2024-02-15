@@ -46,9 +46,9 @@ def isWinner(x, nums):
         total_moves = nums[i] - moves
 
         if total_moves % 2 == 0:
-            maria_wins += 1
-        else:
             ben_wins += 1
+        else:
+            maria_wins += 1
 
     if maria_wins > ben_wins:
         return "Maria"
