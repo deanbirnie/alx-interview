@@ -31,6 +31,9 @@ def isWinner(x, nums):
     Iterate through nums array to determine who the winner
     of each game will be.
     """
+    if not nums or x < 1:
+        return None
+
     maria_wins = 0
     ben_wins = 0
 
