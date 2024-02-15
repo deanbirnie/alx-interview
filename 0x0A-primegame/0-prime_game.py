@@ -33,6 +33,8 @@ def isWinner(x, nums):
     """
     if not nums or x < 1:
         return None
+    if x != len(nums):
+        return None
 
     maria_wins = 0
     ben_wins = 0
