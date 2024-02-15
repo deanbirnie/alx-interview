@@ -43,9 +43,7 @@ def isWinner(x, nums):
         primes = primeSieve(nums[i])
         moves = len(primes)
 
-        total_moves = nums[i] - moves
-
-        if total_moves % 2 == 0:
+        if moves % 2 == 0:
             ben_wins += 1
         else:
             maria_wins += 1
