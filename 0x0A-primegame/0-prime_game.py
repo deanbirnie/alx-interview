@@ -34,8 +34,6 @@ def isWinner(x, nums):
     if not nums or x < 1:
         return None
 
-    nums.sort()
-
     maria_wins = 0
     ben_wins = 0
 
@@ -52,5 +50,7 @@ def isWinner(x, nums):
         return "Maria"
     elif ben_wins > maria_wins:
         return "Ben"
+    elif maria_wins == ben_wins:
+        return None
     else:
         return None
