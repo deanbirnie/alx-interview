@@ -34,6 +34,8 @@ def isWinner(x, nums):
     if not nums or x < 1:
         return None
 
+    nums.sort()
+
     maria_wins = 0
     ben_wins = 0
 
@@ -41,10 +43,12 @@ def isWinner(x, nums):
         primes = primeSieve(nums[i])
         moves = len(primes)
 
-        if moves % 2 == 0:
-            ben_wins += 1
-        else:
+        total_moves = nums[i] - moves
+
+        if total_moves % 2 == 0:
             maria_wins += 1
+        else:
+            ben_wins += 1
 
     if maria_wins > ben_wins:
         return "Maria"
