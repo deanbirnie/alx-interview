@@ -12,10 +12,18 @@ def isPrime(num):
     if num < 2:
         return False
     else:
-        for i in range(2, int(num/2) + 1):
+        for i in range(2, int(num ** 0.5) + 1):
             if (num % i) == 0:
                 return False
     return True
+
+
+def primeSieve(upperLim):
+    """
+    Helper to pre-calculate all primes up to the max number in an array
+    """
+    primes = [num for num in range(2, upperLim + 1) if isPrime(num)]
+    return primes
 
 
 def isWinner(x, nums):
@@ -27,11 +35,8 @@ def isWinner(x, nums):
     ben_wins = 0
 
     for i in range(x):
-        moves = 0
-
-        for j in range(1, nums[i] + 1):
-            if isPrime(j):
-                moves += 1
+        primes = primeSieve(nums[i])
+        moves = len(primes)
 
         if moves % 2 == 0:
             ben_wins += 1
