@@ -31,13 +31,15 @@ def isWinner(x, nums):
     Iterate through nums array to determine who the winner
     of each game will be.
     """
-    if not nums or x < 1 or x > len(nums):
+    if not nums or x < 1:
         return None
 
     maria_wins = 0
     ben_wins = 0
 
     for i in range(x):
+        if nums[i] < 0:
+            continue
         primes = primeSieve(nums[i])
         moves = len(primes)
 
@@ -50,7 +52,5 @@ def isWinner(x, nums):
         return "Maria"
     elif ben_wins > maria_wins:
         return "Ben"
-    elif maria_wins == ben_wins:
-        return None
     else:
         return None
